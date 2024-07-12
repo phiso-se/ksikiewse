@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ghost Kitchen Menu Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    textarea, input, button {
+      font-size: 16px;
+      padding: 10px;
+      margin: 10px;
+    }
+    #generated-menu {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ghost Kitchen Menu Generator</h1>
+  <label for="restaurant-name">Restaurant Name:</label>
+  <input type="text" id="restaurant-name" placeholder="Enter restaurant name" required>
+  <br>
+  <button onclick="generateMenu()">Generate Menu</button>
+  <div id="generated-menu"></div>
+
+  <script>
+    function generateMenu() {
+      const restaurantName = document.getElementById('restaurant-name').value;
+      const generatedMenu = generateUniqueMenuItems(3);
+      document.getElementById('generated-menu').textContent = `${restaurantName} ${generatedMenu.join(', ')}`;
+    }
+
+    function generateUniqueMenuItems(count) {
+      const menuItems = [];
+      const uniqueWords = getUniqueWords(count * 3);
+
+      for (let i = 0; i < count; i++) {
+        const item = `${uniqueWords[i]} ${uniqueWords[i + count]} ${uniqueWords[i + (count * 2)]}`;
+        menuItems.push(item);
+      }
+
+      return menuItems;
+    }
+
+    function getUniqueWords(count) {
+      const words = [
+        "Zesty", "Fusion", "Artisanal", "Gourmet", "Crafted", "Celestial", "Ethereal", "Radiant", "Enchanted", "Ethereal",
+        "Cosmic", "Galactic", "Soulful", "Transcendent", "Enlightened", "Euphoric", "Harmonious", "Synergistic", "Infinite", "Luminous"
+      ];
+      const uniqueWords = new Set();
+
+      while (uniqueWords.size < count) {
+        uniqueWords.add(words[Math.floor(Math.random() * words.length)]);
+      }
+
+      return Array.from(uniqueWords);
+    }
+  </script>
+</body>
+</html>
